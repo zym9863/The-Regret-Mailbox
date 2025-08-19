@@ -1,20 +1,28 @@
 /**
- * 全局样式和CSS变量定义
+ * 全局样式和CSS变量定义 - 增强版
  */
+
+/* 引入高级视觉效果 */
+@import './enhanced-visuals.css';
 
 :root {
   /* 字体 */
-  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  /* 浅色主题颜色 */
+  /* 浅色主题颜色 - 更鲜艳 */
   --primary-color: #6366f1;
   --secondary-color: #8b5cf6;
   --accent-color: #06b6d4;
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
+  
+  /* 新增颜色 */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 
   /* 背景色 */
   --bg-primary: #ffffff;
@@ -92,6 +100,23 @@ body {
   transition: background-color var(--transition-normal), color var(--transition-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 全局背景装饰 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at top left, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 #app {
@@ -224,17 +249,17 @@ input:focus, textarea:focus, select:focus {
   gap: var(--spacing-xl);
 }
 
-/* 动画类 */
+/* 增强动画类 */
 .fade-in {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide-in-up {
-  animation: slideInUp 0.3s ease-out;
+  animation: slideInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide-in-down {
-  animation: slideInDown 0.3s ease-out;
+  animation: slideInDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .scale-in {
@@ -335,29 +360,53 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-/* 悬停效果 */
+/* 增强悜浮效果 */
 .hover-lift {
-  transition: transform var(--transition-normal);
+  transition: all var(--transition-normal);
 }
 
 .hover-lift:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 .hover-scale {
-  transition: transform var(--transition-normal);
+  transition: all var(--transition-normal);
 }
 
 .hover-scale:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .hover-glow {
-  transition: box-shadow var(--transition-normal);
+  transition: all var(--transition-normal);
+  position: relative;
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 
+    0 0 30px rgba(99, 102, 241, 0.4),
+    0 0 60px rgba(99, 102, 241, 0.2);
+}
+
+.hover-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  border-radius: inherit;
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.hover-glow:hover::before {
+  opacity: 0.3;
 }
 
 /* 加载状态 */

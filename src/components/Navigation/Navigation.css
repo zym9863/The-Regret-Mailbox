@@ -1,12 +1,33 @@
 /**
- * 导航组件样式
+ * 导航组件样式 - 增强版
  */
 
 .app-navigation {
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(to bottom,
+    var(--bg-primary),
+    rgba(var(--bg-primary), 0.95)
+  );
+  border-bottom: 1px solid rgba(99, 102, 241, 0.08);
   padding: 0 2rem;
   overflow-x: auto;
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.app-navigation::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(99, 102, 241, 0.2),
+    rgba(139, 92, 246, 0.2),
+    transparent
+  );
 }
 
 .nav-content {
@@ -25,32 +46,74 @@
   background: transparent;
   color: var(--text-secondary);
   cursor: pointer;
-  border-radius: 0.5rem 0.5rem 0 0;
-  transition: all 0.2s ease;
+  border-radius: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
   position: relative;
   font-size: 0.875rem;
   font-weight: 500;
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary-color), transparent);
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+  opacity: 0.3;
+}
+
+.nav-item:hover::before {
+  width: 100px;
+  height: 100px;
 }
 
 .nav-item:hover {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .nav-item.active {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
+  box-shadow: 
+    0 4px 12px rgba(99, 102, 241, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 .nav-item.active::after {
   content: '';
   position: absolute;
   bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--primary-color);
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  border-radius: 2px;
+  animation: navGlow 2s ease infinite;
+}
+
+@keyframes navGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 .nav-label {

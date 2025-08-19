@@ -1,0 +1,609 @@
+/**
+ * 高级视觉效果样式
+ * 包含动画、粒子效果、高级渐变等装饰性元素
+ */
+
+/* ===================== 高级渐变背景 ===================== */
+.animated-gradient-bg {
+  background: linear-gradient(270deg, 
+    #667eea 0%, 
+    #764ba2 25%, 
+    #f093fb 50%, 
+    #c471f5 75%, 
+    #667eea 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 网格渐变背景 */
+.mesh-gradient {
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  opacity: 0.8;
+}
+
+/* 极光渐变 */
+.aurora-gradient {
+  background: linear-gradient(to bottom, 
+    transparent,
+    rgba(99, 102, 241, 0.1) 20%,
+    rgba(139, 92, 246, 0.1) 40%,
+    rgba(6, 182, 212, 0.05) 60%,
+    transparent
+  );
+  animation: aurora 8s ease-in-out infinite;
+}
+
+@keyframes aurora {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 0.8; transform: translateY(-10px); }
+}
+
+/* ===================== 玻璃态效果 ===================== */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.37),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .glassmorphism {
+  background: rgba(17, 25, 40, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.glassmorphism-card {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ===================== 新拟态效果 ===================== */
+.neumorphism {
+  background: var(--bg-secondary);
+  border-radius: 20px;
+  box-shadow: 
+    20px 20px 60px rgba(0, 0, 0, 0.1),
+    -20px -20px 60px rgba(255, 255, 255, 0.1);
+}
+
+.neumorphism-inset {
+  background: var(--bg-secondary);
+  border-radius: 20px;
+  box-shadow: 
+    inset 5px 5px 10px rgba(0, 0, 0, 0.1),
+    inset -5px -5px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* ===================== 粒子动画背景 ===================== */
+.particle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 20s infinite;
+}
+
+.particle:nth-child(odd) {
+  background: var(--secondary-color);
+  animation-duration: 25s;
+}
+
+.particle:nth-child(even) {
+  animation-duration: 15s;
+  width: 6px;
+  height: 6px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ===================== 光晕效果 ===================== */
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    #ff0080, #ff8c00, #ffd700, 
+    #00ff00, #00ffff, #0080ff, 
+    #ff0080
+  );
+  background-size: 400%;
+  border-radius: inherit;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: glowing 20s linear infinite;
+  z-index: -1;
+}
+
+.glow-effect:hover::before {
+  opacity: 0.6;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+/* ===================== 涟漪效果 ===================== */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ripple:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* ===================== 呼吸灯效果 ===================== */
+.breathing-glow {
+  animation: breathing 3s ease-in-out infinite;
+}
+
+@keyframes breathing {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(99, 102, 241, 0.3),
+      0 0 40px rgba(99, 102, 241, 0.2),
+      0 0 60px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(99, 102, 241, 0.5),
+      0 0 60px rgba(99, 102, 241, 0.3),
+      0 0 90px rgba(99, 102, 241, 0.2);
+  }
+}
+
+/* ===================== 霓虹文字效果 ===================== */
+.neon-text {
+  text-shadow: 
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 30px currentColor,
+    0 0 40px currentColor;
+  animation: neon-flicker 2s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
+  }
+}
+
+/* ===================== 3D 翻转卡片 ===================== */
+.flip-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flip-card:hover {
+  transform: rotateY(10deg) rotateX(-10deg);
+}
+
+/* ===================== 漂浮动画 ===================== */
+.floating {
+  animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ===================== 脉冲圆环 ===================== */
+.pulse-ring {
+  position: relative;
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-ring-animation 2s ease-out infinite;
+}
+
+@keyframes pulse-ring-animation {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ===================== 炫彩边框 ===================== */
+.rainbow-border {
+  position: relative;
+  background: var(--bg-primary);
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.rainbow-border::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, 
+    #ff0000, #ff7300, #fffb00, 
+    #48ff00, #00ffd5, #002bff, 
+    #7a00ff, #ff00c8, #ff0000
+  );
+  background-size: 400%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: rainbow-border-animation 20s linear infinite;
+}
+
+@keyframes rainbow-border-animation {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+/* ===================== 液体动画按钮 ===================== */
+.liquid-button {
+  position: relative;
+  padding: 20px 40px;
+  display: inline-block;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 50px;
+  background: var(--primary-color);
+  color: white;
+  transition: all 0.3s;
+}
+
+.liquid-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.liquid-button:hover::before {
+  left: 100%;
+}
+
+/* ===================== 光标跟随效果 ===================== */
+.cursor-follow {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: all 0.1s ease;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+/* ===================== 打字机效果 ===================== */
+.typewriter {
+  overflow: hidden;
+  border-right: 3px solid var(--primary-color);
+  white-space: nowrap;
+  letter-spacing: 0.15em;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--primary-color); }
+}
+
+/* ===================== 磁性悬停效果 ===================== */
+.magnetic-hover {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.magnetic-hover:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+
+/* ===================== 渐进加载动画 ===================== */
+.progressive-load {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: progressiveLoad 0.6s ease forwards;
+}
+
+.progressive-load:nth-child(1) { animation-delay: 0.1s; }
+.progressive-load:nth-child(2) { animation-delay: 0.2s; }
+.progressive-load:nth-child(3) { animation-delay: 0.3s; }
+.progressive-load:nth-child(4) { animation-delay: 0.4s; }
+.progressive-load:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes progressiveLoad {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== 星空背景 ===================== */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: transparent;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 5s infinite;
+}
+
+.star:nth-child(odd) {
+  animation-delay: 1s;
+  animation-duration: 6s;
+}
+
+.star:nth-child(even) {
+  animation-delay: 2s;
+  animation-duration: 4s;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* ===================== 水波纹效果 ===================== */
+.water-wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.water-wave::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.3) 0%, 
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  transition: width 0.8s, height 0.8s;
+}
+
+.water-wave:hover::after {
+  width: 200%;
+  height: 200%;
+}
+
+/* ===================== 高级阴影效果 ===================== */
+.layered-shadow {
+  box-shadow: 
+    0 1px 1px rgba(0,0,0,0.08), 
+    0 2px 2px rgba(0,0,0,0.08), 
+    0 4px 4px rgba(0,0,0,0.08), 
+    0 8px 8px rgba(0,0,0,0.08),
+    0 16px 16px rgba(0,0,0,0.08);
+}
+
+.long-shadow {
+  text-shadow: 
+    1px 1px 0 rgba(0,0,0,0.1),
+    2px 2px 0 rgba(0,0,0,0.09),
+    3px 3px 0 rgba(0,0,0,0.08),
+    4px 4px 0 rgba(0,0,0,0.07),
+    5px 5px 0 rgba(0,0,0,0.06),
+    6px 6px 0 rgba(0,0,0,0.05),
+    7px 7px 0 rgba(0,0,0,0.04),
+    8px 8px 0 rgba(0,0,0,0.03),
+    9px 9px 0 rgba(0,0,0,0.02),
+    10px 10px 0 rgba(0,0,0,0.01);
+}
+
+/* ===================== 背景图案 ===================== */
+.dots-pattern {
+  background-image: radial-gradient(circle, 
+    var(--primary-color) 1px, 
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+.grid-pattern {
+  background-image: 
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+/* ===================== 彩虹文字 ===================== */
+.rainbow-text {
+  background: linear-gradient(to right, 
+    #ff0000, #ff7300, #fffb00, 
+    #48ff00, #00ffd5, #002bff, 
+    #7a00ff, #ff00c8, #ff0000
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: rainbow-text-animation 3s ease-in-out infinite;
+}
+
+@keyframes rainbow-text-animation {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ===================== 滚动视差效果 ===================== */
+.parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background: linear-gradient(to bottom, 
+    var(--primary-color), 
+    var(--secondary-color)
+  );
+  opacity: 0.05;
+  z-index: -1;
+  will-change: transform;
+}
+
+/* ===================== 高级加载动画 ===================== */
+.advanced-loader {
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.advanced-loader::before,
+.advanced-loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--primary-color);
+}
+
+.advanced-loader::before {
+  animation: advanced-spin 1.5s linear infinite;
+}
+
+.advanced-loader::after {
+  border-top-color: var(--secondary-color);
+  animation: advanced-spin 1.5s linear infinite reverse;
+  animation-delay: 0.25s;
+}
+
+@keyframes advanced-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}

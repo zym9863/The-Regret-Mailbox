@@ -1,13 +1,130 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Preact + TS</title>
+    <meta name="description" content="遗憾信箱 - 记录那些未曾说出的话，给过去一个交代，给未来一份期待" />
+    <meta name="keywords" content="遗憾信箱,时光胶囊,情感记录,回忆,心情日记" />
+    <meta name="author" content="The Regret Mailbox" />
+    <meta property="og:title" content="遗憾信箱 - 那些未曾说出的话" />
+    <meta property="og:description" content="一个安全的空间，让你记录那些未曾说出的话，创建时光胶囊给未来的自己" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#6366f1" />
+    <title>遗憾信箱 - 那些未曾说出的话</title>
+    
+    <!-- 预加载重要字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    
+    <!-- 样式优先级提升 -->
+    <style>
+      /* 初始加载优化 */
+      body {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      body.loaded {
+        opacity: 1;
+      }
+      
+      /* 加载动画 */
+      .initial-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+      
+      .initial-loader.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      .loader-content {
+        text-align: center;
+        color: white;
+      }
+      
+      .loader-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        animation: pulse 1.5s ease infinite;
+      }
+      
+      .loader-dots {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+      
+      .loader-dot {
+        width: 12px;
+        height: 12px;
+        background: white;
+        border-radius: 50%;
+        animation: bounce 1.4s ease infinite;
+      }
+      
+      .loader-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      
+      .loader-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      
+      @keyframes bounce {
+        0%, 80%, 100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
   </head>
   <body>
+    <!-- 初始加载动画 -->
+    <div class="initial-loader" id="initial-loader">
+      <div class="loader-content">
+        <div class="loader-text">遗憾信箱</div>
+        <div class="loader-dots">
+          <div class="loader-dot"></div>
+          <div class="loader-dot"></div>
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+    </div>
+    
     <div id="app"></div>
+    
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- 加载完成后隐藏加载动画 -->
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.getElementById('initial-loader').classList.add('fade-out');
+          document.body.classList.add('loaded');
+          setTimeout(() => {
+            document.getElementById('initial-loader').style.display = 'none';
+          }, 300);
+        }, 500);
+      });
+    </script>
   </body>
 </html>
