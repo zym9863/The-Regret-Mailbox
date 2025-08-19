@@ -1,3 +1,5 @@
+[简体中文](README.md) | [English](README-EN.md)
+
 # 遗憾信箱 (The Regret Mailbox)
 
 一个温暖治愈的Web应用，让你记录遗憾，给未来写信。
