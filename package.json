@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.27.0"
+    "@preact/signals": "^2.2.1",
+    "date-fns": "^4.1.0",
+    "lucide-preact": "^0.540.0",
+    "preact": "^10.27.0",
+    "preact-router": "^4.1.2"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.2",
